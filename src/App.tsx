@@ -15,10 +15,30 @@ import {useForm} from "./hooks/useForm";
 //Css
 import './App.css'
 
+type FormFields = {
+  name: string,
+  email: string,
+  review: string,
+  comment: string,
+}
+
+const formtemplate: FormFields = {
+  name: "",
+  email: "",
+  review: "",
+  comment: "",
+}
+
 function App() {
+  const [data, setData] = useState(formtemplate)
+  const updateFieldHandler = (key: string, value: string) =>{
+    setData((prev) => {
+      return {...prev, [key]: value}
+    })
+  }
 
   const formComponents = [
-    <UserForm/>,
+    <UserForm data={data} updateFieldHandler={updateFieldHandler}/>,
     <ReviewForm/>,
     <Thanks/>
   ]
